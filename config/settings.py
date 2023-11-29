@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+apps = ['api.kanban']
 
 INSTALLED_APPS = [
     'safedelete',
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api',
+    *apps,
 ]
 
 MIDDLEWARE = [
