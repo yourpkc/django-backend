@@ -8,6 +8,30 @@ class KanbanSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class KanbanRepresentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Kanban
+        fields = '__all__'
+    
+    def to_representation(self, kanban):
+        data = super().to_representation(kanban)
+        data['columns'] = ColumnRepresentSerializer(kanban.kanban_columns.all(), many=True).data
+        return data
+
+class ColumnRepresentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Column
+        fields = '__all__'
+    
+    def to_representation(self, column):
+        data = super().to_representation(column)
+        data['cards'] = CardSerializer(column.column_cards, many=True).data
+        return data
+
+
+
 class ColumnSerializer(serializers.ModelSerializer):
 
     def to_internal_value(self, data):

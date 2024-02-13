@@ -19,6 +19,6 @@ class Card(BaseModel):
                                    default="")
     column = models.ForeignKey(Column, blank=False, null=False,
                                on_delete=models.CASCADE, 
-                               related_name="kanban_columns")
+                               related_name="column_cards")
     head = models.ForeignKey('self', null=True, on_delete=models.RESTRICT)
     is_tail = models.BooleanField(default=False)
